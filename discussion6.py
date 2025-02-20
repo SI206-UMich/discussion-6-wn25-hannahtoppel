@@ -1,8 +1,27 @@
 import unittest
 import os
+import csv
 
 
 def load_csv(f):
+    base_path = os.path.abspath(os.path.dirname(__file__))
+    full_path = os.path.join(base_path, f)
+    with open(full_path) as fh:
+        r = csv.reader(fh)
+        rows = []
+        print(f"Add the data from the csv")
+        for row in r:
+            print(f"Adding {row} to rows")
+            rows.append(row)
+        print(f"Final value of rows is {rows}")
+        d = {}
+        header = rows[0]
+        print(header)
+
+    
+
+     
+
     '''
     Params: 
         f, name or path or CSV file: string
@@ -68,6 +87,12 @@ class dis7_test(unittest.TestCase):
 
 def main():
     unittest.main(verbosity=2)
+    print("----------------------------------------------------------------------")
+    flight_dict = load_csv('daily_visitors.csv')
+    print("Output of load_csv:", flight_dict, "\n")
+    print("Output of get_annual_max:", get_annual_max(flight_dict), "\n")
+    print("Output of get_month_avg:", get_month_avg(flight_dict), "\n")
+
 
 if __name__ == '__main__':
     main()
